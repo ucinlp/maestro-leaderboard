@@ -1,0 +1,6 @@
+{
+    "ip": "0.0.0.0",
+    "port": "443",
+    "subtitle": "Leaderboard for the CS175 AI Project Course",
+    "data_path": "./data/"
+}

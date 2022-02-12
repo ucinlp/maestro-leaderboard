@@ -1,0 +1,8 @@
+title: Attack Project
+table_name_column: Type
+sort_cols:
+    - Targeted
+    - Untargeted
+table_names:
+    black: "Black-box Attacks"
+    white: "White-box Attacks"

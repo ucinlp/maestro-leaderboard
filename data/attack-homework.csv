@@ -1,0 +1,9 @@
+Name,Targeted,Untargeted,Type
+Sameer,0.0,0.0,white
+Mani,90.0,90.0,white
+Zhou,10.0,100.0,white
+Sergio,100.0,10.0,white
+Sameer,5.0,5.0,black
+Mani,95.0,95.0,black
+Zhou,15.0,99.0,black
+Sergio,99.0,15.0,black

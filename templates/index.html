@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://rajpurkar.github.io/SQuAD-explorer/ -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>The Maestro Leaderboard for CS175 AI Project Course</title>
+    <meta name="description" content="The Maestro Leaderboard for CS175 AI Project Course">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- <meta property="og:image" content="/logo.png"> -->
+    <!-- <link rel="image_src" type="image/png" href="https://rajpurkar.github.io/SQuAD-explorer/logo.png"> -->
+    <!-- <link rel="shortcut icon" href="https://rajpurkar.github.io/SQuAD-explorer/favicon.ico" type="image/x-icon"> -->
+    <!-- <link rel="icon" href="https://rajpurkar.github.io/SQuAD-explorer/favicon.ico" type="image/x-icon"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'index.css') }}">
+    <!-- <script id="twitter-wjs" src="{{ url_for('static', filename= 'squad/widgets.js.download') }}"></script> -->
+    <!-- <script async="" src="{{ url_for('static', filename= 'squad/analytics.js.download') }}"></script> -->
+    <!-- <script async="" defer="" src="{{ url_for('static', filename= 'squad/buttons.js.download') }}"></script> -->
+    <!-- <script src="{{ url_for('static', filename= 'squad/analytics.js(1).download') }}"></script> -->
+    <!-- <script charset="utf-8"
+        src="{{ url_for('static', filename= 'squad/button.0d6aa7fd095b2a9dd19cc66c7c2ed64b.js.download') }}"></script> -->
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1043.0" data-gr-ext-installed="">
+    <div class="navbar navbar-default navbar-fixed-top" id="topNavbar" role="navigation">
+        <div class="container clearfix" id="navContainer">
+            <div class="rightNav">
+                <div class="collapseDiv"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse"
+                        data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span
+                            class="glyphicon glyphicon-menu-hamburger"></span></button></div>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- <li><a href="/">Home</a></li> -->
+                        <!-- <li><a href="https://rajpurkar.github.io/SQuAD-explorer/explore/v2.0/dev/">Explore 2.0</a></li>
+                        <li><a href="https://rajpurkar.github.io/SQuAD-explorer/explore/1.1/dev/">Explore 1.1</a></li> -->
+                    </ul>
+                </div>
+            </div>
+            <!-- <div class="leftNav">
+                <div class="brandDiv"><a class="navbar-brand"
+                        href="https://rajpurkar.github.io/SQuAD-explorer/">SQuAD</a></div>
+            </div> -->
+        </div>
+    </div>
+    <div class="cover" id="topCover">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 id="appTitle">{{data.title}}</h1>
+                    <h2 id="appSubtitle">{{server.subtitle}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cover" id="contentCover">
+        <div class="container">
+            <h4>Sort by:
+            {% for col in data.sort_cols %}
+                {% if col == data.sort_col %}
+                {{col}}
+                {% else %}
+                <a href="?sortby={{col}}">{{col}}</a>
+                {% endif %}
+                {{ "," if not loop.last }}
+            {% endfor %}</h4>
+            <div class="row">
+                {% for table_name, table in data.tables.items() %}
+                <div class="col-md-{{ '6' if data.tables|length > 1 else '12'}}">
+                    <div class="infoCard">
+                        <div class="infoBody">
+                            {% if table_name | length %}
+                            <div class="infoHeadline">
+                                <h2>{{table_name}}</h2>
+                            </div>
+                            {% endif %}
+                            <table class="table performanceTable">
+                                <tbody>
+                                    <tr>
+                                        <th>Rank</th>
+                                        {% for col in table.head() %}
+                                        <th>
+                                            {{col}}
+                                            {{ "&#x2605;"|safe if col == data.sort_col else "" }}
+                                        </th>
+                                        {% endfor %}
+                                    </tr>
+
+                                    {% for key,value in table.iterrows() %}
+                                        <tr>
+                                            <td>{{loop.index}}</td>
+                                            {% for head in table.head() %}
+                                            <td>{{value[head]}}</td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- <nav class="navbar navbar-default navbar-static-bottom footer">
+        <div class="container clearfix">
+            <div class="rightNav">
+                <div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="https://rajpurkar.github.io/SQuAD-explorer/">SQuAD</a></li>
+                        <li><a href="http://nlp.stanford.edu/">Stanford NLP Group</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav> -->
+    <!-- <script src="{{ url_for('static', filename= 'squad/jquery.min.js.download') }}"></script>
+    <script src="{{ url_for('static', filename= 'squad/bootstrap.min.js.download') }}"></script> -->
+    <!-- <iframe scrolling="no" frameborder="0" allowtransparency="true"
+        src="{{ url_for('static', filename= 'squad/widget_iframe.21f942bb866c2823339b839747a0c50c.html') }}"
+        title="Twitter settings iframe" style="display: none;"></iframe><iframe id="rufous-sandbox" scrolling="no"
+        frameborder="0" allowtransparency="true" allowfullscreen="true"
+        style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;"
+        title="Twitter analytics iframe" src="{{ url_for('static', filename= 'squad/saved_resource.html') }}"></iframe> -->
+</body>
+<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+
+</html>
