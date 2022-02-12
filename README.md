@@ -9,13 +9,13 @@ Stored in `config.json`, and specifies server address, and details common to all
     "ip": "0.0.0.0",
     "port": "443",
     "subtitle": "Leaderboard for the CS175 AI Project Course",
-    "data_path": "./data/" # stores the leaderboard data
+    "data_path": "./data/" # stores the leaderboards data
 }
 ```
 
 ## Leaderboard
 
-Each leaderboard is specified using an `ID`, such as `attack-homework`. This `ID` becomes specifies the URL of the leaderboard, i.e. `/leaderboard/<ID>`, such as `/leaderboard/attack-homework`.
+Each leaderboard is specified using an `ID`, such as `attack-homework`. This `ID` becomes the URL of the leaderboard, i.e. `/leaderboard/<ID>`, such as `/leaderboard/attack-homework`.
 
 Each leaderboard is specified using two files (in `data_path`):
 
@@ -32,6 +32,7 @@ Each leaderboard is specified using two files (in `data_path`):
   ``` 
 - **Data** (`<ID>.csv`): A CSV file (with headers) that store the data to be displayed. Should contain at least `sort_cols` and `table_name_column` (if splitting into multiple files). Example data:
   ```csv
+  Name,Targeted,Untargeted,Type
   Zhou,10.0,100.0,white
   Sergio,100.0,10.0,white
   Sameer,5.0,5.0,black
