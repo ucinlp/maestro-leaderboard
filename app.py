@@ -50,11 +50,14 @@ class Leaderboard:
 
     def load_data(self):
         self.results = {}
-        table = pd.read_csv(Leaderboard.data_file(self.id))
+        table = pd.read_csv(Leaderboard.data_file(self.id)).round(2)
+        print(self.sort_cols)
         self.tables = {}
         if self.table_name_column is None:
+            table = table[self.sort_cols]
             self.tables[""] = table
         else:
+            table = table[self.sort_cols + [self.table_name_column]]
             for value_id, table_name in self.table_names.items():
                 subtable = table[table[self.table_name_column] == value_id]
                 subtable = subtable.drop(columns=[self.table_name_column])

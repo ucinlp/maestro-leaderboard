@@ -155,3 +155,11 @@ pre {
   padding-left: 2px;
   padding-right: 2px;
 }
+
+[class*="not-visible-"] {
+  display: none !important;
+}
+
+[class*="hidden-"] {
+  color: rgb(171, 171, 171) !important;
+}
