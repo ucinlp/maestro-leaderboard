@@ -1,8 +1,14 @@
 title: Attack Project
 table_name_column: Type
 sort_cols:
+    - Name
     - Targeted
+    - Final Acc
+    - Number of Queries
+    - Distance
+    - Binary Score
     - Untargeted
+    - Final Untargeted Acc
 table_names:
-    black: "Black-box Attacks"
-    white: "White-box Attacks"
+    blackbox: "Black-box Attacks"
+    whitebox: "White-box Attacks"

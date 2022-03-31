@@ -1,0 +1,8 @@
+title: Defense Project
+sort_cols:
+    - Name
+    - Evaluation Time
+    - FGSM Acc
+    - PGD Acc
+    - Hidden Attack 
+    - Raw Acc

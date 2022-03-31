@@ -1,0 +1,8 @@
+title: "War Defense (Round 1)"
+sort_cols:
+    - Name
+    - Evaluation Time
+    - Raw Acc
+    - FGSM Acc
+    - PGD Acc
+    - Hidden Attack

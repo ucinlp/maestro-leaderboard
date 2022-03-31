@@ -1,0 +1,10 @@
+title: "War Attack (Round 1)"
+sort_cols:
+    - Name
+    - Evaluation Time
+    - Defense 1 Attacker Success Rate
+    - Defense 1 Time
+    - Defense 1 Dist
+    - Defense 2 Attacker Success Rate
+    - Defense 2 Time
+    - Defense 2 Dist

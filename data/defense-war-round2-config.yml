@@ -1,0 +1,9 @@
+title: "War Defense (Round 2)"
+sort_cols:
+    - Name
+    - Evaluation Time
+    - Raw Acc
+    - PGD Acc
+    - Hidden Acc
+    - Hidden 2 Acc
+    - Hidden 3 Acc

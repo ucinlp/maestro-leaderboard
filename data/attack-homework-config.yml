@@ -1,4 +1,9 @@
 title: Attack Homework
 sort_cols:
-    - Targeted
-    - Untargeted
+    - name
+    - score
+    - number_queries
+    - final_acc
+    - distance
+    - cost_time
+    - binary_score
