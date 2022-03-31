@@ -50,19 +50,22 @@ class Leaderboard:
 
     def load_data(self):
         self.results = {}
-        table = pd.read_csv(Leaderboard.data_file(self.id)).round(2)
+        try:
+            table = pd.read_csv(Leaderboard.data_file(self.id)).round(2)
+        except:
+            table = pd.DataFrame()
         print(self.sort_cols)
         self.tables = {}
-        if self.table_name_column is None:
+        if not table.empty and self.table_name_column is None:
             table = table[self.sort_cols]
             self.tables[""] = table
-        else:
+        elif not table.empty:
             table = table[self.sort_cols + [self.table_name_column]]
             for value_id, table_name in self.table_names.items():
                 subtable = table[table[self.table_name_column] == value_id]
                 subtable = subtable.drop(columns=[self.table_name_column])
                 self.tables[table_name] = subtable
-
+        print(table.head())
     def get_render_data(self, sortby=None):
         render_data = {}
         render_data['title'] = self.title
@@ -71,6 +74,7 @@ class Leaderboard:
         render_data['sort_cols'] = self.sort_cols
         for table_id, table in self.tables.items():
             render_data['tables'][table_id] = table.sort_values(by=render_data['sort_col'], ascending=False)
+        print(render_data)
         return render_data
 
 def main():
@@ -97,7 +101,7 @@ def main():
     # ------------------ END ATTACK SERVER FUNCTIONS ---------------------------
 
     print("Server Running...........")
-    app.run(debug=True)
+    # app.run(debug=True)
     # app.run(host="0.0.0.0", port=4999)
     app.run(host=IP_ADDR, port=PORT)
 
