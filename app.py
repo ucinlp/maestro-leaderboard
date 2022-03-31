@@ -80,7 +80,7 @@ class Leaderboard:
 def main():
     @app.route("/", methods=["GET"])
     def home():
-        return "<h1>The Home of Maestro Server</p>"
+        return render_template("home.html")
 
     @app.route("/leaderboard/<leaderboard_id>")
     def leaderboard(leaderboard_id):
