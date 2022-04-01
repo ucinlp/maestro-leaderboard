@@ -46,9 +46,13 @@ class Leaderboard:
             self.sort_cols = []
             self.cols_config = {}
             for i, col in enumerate(config['sort_cols']):
-                key = list(col.keys())[0]
-                self.sort_cols.append(key)
-                self.cols_config[key] = config['sort_cols'][i][key]
+                if isinstance(col, str):
+                    self.sort_cols.append(col)
+                    self.cols_config[col] = {}
+                else:
+                    key = list(col.keys())[0]
+                    self.sort_cols.append(key)
+                    self.cols_config[key] = config['sort_cols'][i][key]
             print(self.cols_config)
             print(f'Sort cols: {self.sort_cols}')
             if "table_name_column" in config:
