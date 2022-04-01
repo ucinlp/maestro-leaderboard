@@ -23,6 +23,10 @@
         src="{{ url_for('static', filename= 'squad/button.0d6aa7fd095b2a9dd19cc66c7c2ed64b.js.download') }}"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript">
+        function colorCell(color) {
+            console.log('Hello!' + color)
+        }
+
         window.onload = () => {
             $(document).on('click', '[id^="button_col_"]', function() {
                 var id = parseInt(this.id.match(/\d+$/i));
@@ -152,7 +156,23 @@
                                                 {% if loop.index > 8 %}
                                                     <td class="row_{{outer_loop.index}}_col_{{loop.index}} not-visible-{{loop.index}}">{{value[head]}}</td>
                                                 {% else %}
-                                                    <td class="row_{{outer_loop.index}}_col_{{loop.index}}">{{value[head]}}</td>
+                                                    {% if cols[head].range is not none %}
+                                                        {% set maxhue = cols[head].range.max|float %}
+                                                        {% set minhue = cols[head].range.min|float %}
+                                                        {% set threshold = cols[head].range.threshold|float %}
+                                                        {% if value[head] > maxhue %}
+                                                            {% set hue = 150 %}
+                                                        {% else %}
+                                                            {% set hue = value[head]|float / maxhue * 150 %}
+                                                        {% endif %}
+                                                        {% if cols[head].sort != 'ascending' %}
+                                                            {% set hue = 150 - hue %}
+                                                        {% endif %}
+                                                        <td class="row_{{outer_loop.index}}_col_{{loop.index}}"
+                                                        style="background-color: hsl({{hue}},100%,80%);">{{value[head]}}</td>
+                                                    {% else %}
+                                                        <td class="row_{{outer_loop.index}}_col_{{loop.index}}">{{value[head]}}</td>
+                                                    {% endif %}
                                                 {% endif %}
                                             {% endfor %}
                                         </tr>

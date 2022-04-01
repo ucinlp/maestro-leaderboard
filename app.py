@@ -43,7 +43,14 @@ class Leaderboard:
         with open(self.config_file(self.id), "r") as f:
             config = yaml.safe_load(f)
             self.title = config['title']
-            self.sort_cols = config['sort_cols']
+            self.sort_cols = []
+            self.cols_config = {}
+            for i, col in enumerate(config['sort_cols']):
+                key = list(col.keys())[0]
+                self.sort_cols.append(key)
+                self.cols_config[key] = config['sort_cols'][i][key]
+            print(self.cols_config)
+            print(f'Sort cols: {self.sort_cols}')
             if "table_name_column" in config:
                 self.table_name_column = config['table_name_column']
                 self.table_names = config['table_names']
@@ -73,7 +80,10 @@ class Leaderboard:
         render_data['sort_col'] = sortby if sortby else self.sort_cols[0]
         render_data['sort_cols'] = self.sort_cols
         for table_id, table in self.tables.items():
-            render_data['tables'][table_id] = table.sort_values(by=render_data['sort_col'], ascending=False)
+            render_data['tables'][table_id] = table.sort_values(
+                by=render_data['sort_col'], 
+                ascending=self.cols_config[render_data['sort_col']]['sort'] != 'ascending'
+            )
         print(render_data)
         return render_data
 
@@ -93,6 +103,7 @@ def main():
             return render_template(
                 "index.html",
                 data=leaderboard.get_render_data(sortby),
+                cols=leaderboard.cols_config,
                 server=server_config
             )
         else:
