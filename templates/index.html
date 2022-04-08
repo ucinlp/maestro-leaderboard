@@ -23,8 +23,17 @@
         src="{{ url_for('static', filename= 'squad/button.0d6aa7fd095b2a9dd19cc66c7c2ed64b.js.download') }}"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript">
-        function colorCell(color) {
-            console.log('Hello!' + color)
+        var expanded = false;
+
+        function showCheckboxes() {
+            var checkboxes = document.getElementById("checkboxes");
+            if (!expanded) {
+                checkboxes.style.display = "block";
+                expanded = true;
+            } else {
+                checkboxes.style.display = "none";
+                expanded = false;
+            }
         }
 
         window.onload = () => {
@@ -34,9 +43,12 @@
                 console.log(object);
                 if ($(this).hasClass('hidden-' + id)) {
                     $(this).removeClass('hidden-' + id);
+                    document.getElementById("checkbox_col_" + id).checked = true;
                 } else {
                     $(this).addClass('hidden-' + id);
+                    document.getElementById("checkbox_col_" + id).checked = false;
                 }
+                console.log(document.getElementById("checkbox_col_" + id).checked)
 
                 $('[class^=header_').filter(function(){
                     var class_id = parseInt($(this).attr('class').match(/\d+$/i));
@@ -100,23 +112,36 @@
     <div class="cover" id="contentCover">
         <div class="container">
 		{% if data.tables|length > 0%}
-            <h4>Hide columns:
-            {% for col in data.sort_cols %}
-                {% if loop.index > 8 %}
-                    <a id="button_col_{{loop.index}}" style="cursor: pointer;" class="hidden-{{loop.index}}">{{col}}</a>
-                {% else %}
-                <a id="button_col_{{loop.index}}" style="cursor: pointer;">{{col}}</a>
-                {% endif %}
-                {{ "," if not loop.last }}
-            {% endfor %}</h4>
+            <div id="navbar">
+                <form>
+                    <div class="multiselect">
+                        <div class="selectBox" onclick="showCheckboxes()">
+                        <select>
+                            <option>Hide columns</option>
+                        </select>
+                        <div class="overSelect"></div>
+                        </div>
+                        <div id="checkboxes">
+                            {% for col in data.sort_cols %}
+                                {% if loop.index > 8 %}
+                                <label for="{{ loop.index }}" id="button_col_{{loop.index}}" style="cursor: pointer;">
+                                <input type="checkbox" id="checkbox_col_{{loop.index}}" />{{col}}</label>
+                                {% else %}
+                                <label for="{{ loop.index }}" id="button_col_{{loop.index}}" style="cursor: pointer;">
+                                <input type="checkbox" id="checkbox_col_{{loop.index}}" checked/>{{col}}</label>
+                                {% endif %}  
+                            {% endfor %}
+                        </div>
+                    </div>
+                </form>
 
-            <form action="{{ url_for('leaderboard', 
-            leaderboard_id=request.view_args['leaderboard_id'],
-            sortby=request.values.get('sortby')) }}" method="post">
-                <input type="text" name="student_name" placeholder="Student name">
-                <input type="submit" value="Filter">
-            </form>
-
+                <form action="{{ url_for('leaderboard', 
+                leaderboard_id=request.view_args['leaderboard_id'],
+                sortby=request.values.get('sortby')) }}" method="post">
+                    <input type="text" name="student_name" placeholder="Student name">
+                    <input type="submit" value="Filter">
+                </form>
+            </div>
 	    {% endif %}
             <div class="row">
 		{% if data.tables|length == 0%}
