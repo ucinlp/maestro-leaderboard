@@ -77,13 +77,15 @@ class Leaderboard:
                 subtable = subtable.drop(columns=[self.table_name_column])
                 self.tables[table_name] = subtable
         print(table.head())
-    def get_render_data(self, sortby=None):
+    def get_render_data(self, sortby=None, student_name=None):
         render_data = {}
         render_data['title'] = self.title
         render_data['tables'] = {}
         render_data['sort_col'] = sortby if sortby else self.sort_cols[0]
         render_data['sort_cols'] = self.sort_cols
         for table_id, table in self.tables.items():
+            if student_name is not None:
+                table = table.loc[table['Name'] == student_name]
             render_data['tables'][table_id] = table.sort_values(
                 by=render_data['sort_col'], 
                 ascending=self.cols_config[render_data['sort_col']]['sort'] != 'ascending'
@@ -96,22 +98,37 @@ def main():
     def home():
         return render_template("home.html")
 
-    @app.route("/leaderboard/<leaderboard_id>")
-    def leaderboard(leaderboard_id):
-        args = request.args
-        sortby = args.get("sortby")
-        if Leaderboard.check(leaderboard_id):
-            leaderboard = Leaderboard(leaderboard_id)
-            leaderboard.load_config()
-            leaderboard.load_data()
-            return render_template(
-                "index.html",
-                data=leaderboard.get_render_data(sortby),
-                cols=leaderboard.cols_config,
-                server=server_config
+    @app.route("/leaderboard/<leaderboard_id>", methods=['GET', 'POST'])
+    def leaderboard(leaderboard_id, student_name=None):
+        sortby = request.args.get("sortby")
+        if flask.request.method == 'POST':
+            student_name = flask.request.values.get('student_name')
+            student_name = None if student_name == '' else student_name
+            return flask.redirect(
+                flask.url_for('leaderboard', 
+                    leaderboard_id=request.view_args['leaderboard_id'],
+                    sortby=sortby,
+                    student_name=student_name
+                )
             )
         else:
-            return f"<h1>Cannot find leaderboard with id {leaderboard_id}</p>"
+            student_name = request.args.get("student_name")
+            if Leaderboard.check(leaderboard_id):
+                leaderboard = Leaderboard(leaderboard_id)
+                leaderboard.load_config()
+                leaderboard.load_data()
+                data = leaderboard.get_render_data(
+                    sortby=sortby,
+                    student_name=student_name
+                )
+                return render_template(
+                    "index.html",
+                    data=data,
+                    cols=leaderboard.cols_config,
+                    server=server_config
+                )
+            else:
+                return f"<h1>Cannot find leaderboard with id {leaderboard_id}</p>"
 
     # ------------------ END ATTACK SERVER FUNCTIONS ---------------------------
 
