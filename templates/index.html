@@ -100,24 +100,23 @@
     <div class="cover" id="contentCover">
         <div class="container">
 		{% if data.tables|length > 0%}
-            <h4>Sort by:
+            <h4>Hide columns:
             {% for col in data.sort_cols %}
-                {% if col == data.sort_col %}
-                {{col}}
+                {% if loop.index > 8 %}
+                    <a id="button_col_{{loop.index}}" style="cursor: pointer;" class="hidden-{{loop.index}}">{{col}}</a>
                 {% else %}
-                <a href="?sortby={{col}}">{{col}}</a>
+                <a id="button_col_{{loop.index}}" style="cursor: pointer;">{{col}}</a>
                 {% endif %}
                 {{ "," if not loop.last }}
             {% endfor %}</h4>
-            <h4>Hide columns:
-                {% for col in data.sort_cols %}
-                    {% if loop.index > 8 %}
-                        <a id="button_col_{{loop.index}}" style="cursor: pointer;" class="hidden-{{loop.index}}">{{col}}</a>
-                    {% else %}
-                    <a id="button_col_{{loop.index}}" style="cursor: pointer;">{{col}}</a>
-                    {% endif %}
-                    {{ "," if not loop.last }}
-                {% endfor %}</h4>
+
+            <form action="{{ url_for('leaderboard', 
+            leaderboard_id=request.view_args['leaderboard_id'],
+            sortby=request.values.get('sortby')) }}" method="post">
+                <input type="text" name="student_name" placeholder="Student name">
+                <input type="submit" value="Filter">
+            </form>
+
 	    {% endif %}
             <div class="row">
 		{% if data.tables|length == 0%}
@@ -142,8 +141,16 @@
                                             {% else %}
                                                 <th class="header_col_{{loop.index}}">
                                             {% endif %}
-                                            {{col}}
-                                            {{ "&#x2605;"|safe if col == data.sort_col else "" }}
+                                            {% if col == data.sort_col %}
+                                                {{col}}
+                                                {{ "&#x2605;"|safe }}
+                                            {% else %}
+                                                <a href="{{ url_for('leaderboard', 
+                                                leaderboard_id=request.view_args['leaderboard_id'],
+                                                student_name=request.values.get('student_name'),
+                                                sortby=col
+                                                )}}">{{col}}</a>
+                                            {% endif %}
                                         </th>
                                         {% endfor %}
                                     </tr>
