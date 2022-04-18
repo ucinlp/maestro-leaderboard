@@ -1,14 +1,39 @@
 title: Attack Project
-table_name_column: Type
+table_name_column: Attack Type
 sort_cols:
-    - Name
-    - Targeted
-    - Final Acc
-    - Number of Queries
-    - Distance
-    - Binary Score
-    - Untargeted
-    - Final Untargeted Acc
+    - Name:
+        sort: ascending
+        range: null
+    - Evaluation Time:
+        sort: ascending
+        range: null
+    - Attacker Success Rate:
+        sort: ascending
+        range:
+                max: 100
+                min: 0
+                threshold: 96
+    - distance:
+        sort: descending
+        range:
+                max: 15
+                min: 7
+                threshold: 7.75
+    - Time:
+        sort: descending
+        range: null
+    - Queries:
+        sort: descending
+        range:
+                max: 25000
+                min: 0
+                threshold: 8500
+    - gradient:
+            sort: ascending
+            range: null
+    - Score:
+            sort: ascending
+            range: null
 table_names:
-    blackbox: "Black-box Attacks"
-    whitebox: "White-box Attacks"
+    BlackBox: "Black-box Attacks"
+    WhiteBox: "White-box Attacks"

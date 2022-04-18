@@ -110,7 +110,11 @@
         </div>
     </div>
     <div class="cover" id="contentCover">
+        {% if data.tables|length > 1 %}
+        <div class="container" style="width: 100%;">
+        {% else %}
         <div class="container">
+        {% endif %}
 		{% if data.tables|length > 0%}
             <div id="navbar">
                 <form>
