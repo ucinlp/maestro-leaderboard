@@ -96,7 +96,7 @@ class Leaderboard:
 def main():
     @app.route("/", methods=["GET"])
     def home():
-        return render_template("home.html")
+        return render_template("home.html", message=None)
 
     @app.route("/leaderboard/<leaderboard_id>", methods=['GET', 'POST'])
     def leaderboard(leaderboard_id, student_name=None):
@@ -129,6 +129,13 @@ def main():
                 )
             else:
                 return f"<h1>Cannot find leaderboard with id {leaderboard_id}</p>"
+
+    @app.errorhandler(Exception)
+    def exception_handler(error):
+        print(error)
+        print(repr(error))
+        return render_template("home.html", message=error)
+        #return "If the error persists, please contact the Maestro Administrators on Ed Discussions. Thank you."
 
     # ------------------ END ATTACK SERVER FUNCTIONS ---------------------------
 

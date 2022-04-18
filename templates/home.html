@@ -25,7 +25,11 @@
 </head>
 
 <body data-new-gr-c-s-check-loaded="14.1043.0" data-gr-ext-installed="">
+    {% if message is none %}
     <div class="navbar navbar-default navbar-fixed-top" id="topNavbar" role="navigation">
+    {% else %}
+    <div class="navbar navbar-default navbar-fixed-top" id="topNavbar" role="navigation" style="background: #ff6938;">
+    {% endif %}
         <div class="container clearfix" id="navContainer">
             <div class="rightNav">
                 <div class="collapseDiv"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse"
@@ -41,7 +45,11 @@
             </div>
         </div>
     </div>
+    {% if message is none %}
     <div class="cover" id="topCover">
+    {% else %}
+    <div class="cover" id="topCover" style="background: #ff8849;">
+    {% endif %}
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -52,6 +60,7 @@
         </div>
     </div>
     <div class="cover" id="contentCover">
+        {% if message is none %}
         <div class="container" style="display: flex; flex-direction: row; justify-content: space-between;">
 		
             <div>
@@ -92,6 +101,12 @@
             </div>
 
         </div>
+        {% else %}
+        <div class="container">
+            <h1>Oops! You found an internal error!</h1>
+            <p>If the error persists, please contact the Maestro Administrators on Ed Discussion. Thank you!</p>
+        </div>
+        {% endif %}
     </div>
 </body>
 <grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
