@@ -86,6 +86,8 @@ class Leaderboard:
         for table_id, table in self.tables.items():
             if student_name is not None:
                 table = table.loc[(table['Name'].str.lower()).str.contains(student_name.lower())]
+            else:
+                table = table.groupby('Name', as_index=False).apply(lambda x: x.sort_values(['Evaluation Time']).iloc[-1])
             render_data['tables'][table_id] = table.sort_values(
                 by=render_data['sort_col'], 
                 ascending=self.cols_config[render_data['sort_col']]['sort'] != 'ascending'

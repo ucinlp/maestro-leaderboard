@@ -207,7 +207,16 @@
                                                         <td class="row_{{outer_loop.index}}_col_{{loop.index}}"
                                                         style="background-color: hsl({{hue}},100%,80%);">{{value[head]}}</td>
                                                     {% else %}
-                                                        <td class="row_{{outer_loop.index}}_col_{{loop.index}}">{{value[head]}}</td>
+                                                        {% if loop.index == 1 %}
+                                                            <td class="row_{{outer_loop.index}}_col_{{loop.index}}">
+                                                                <a href="{{ url_for('leaderboard', 
+                                                                leaderboard_id=request.view_args['leaderboard_id'],
+                                                                sortby=request.values.get('sortby'), 
+                                                                student_name=value[head])}}">{{value[head]}}</a> 
+                                                            </td>                                                       
+                                                        {% else %}
+                                                            <td class="row_{{outer_loop.index}}_col_{{loop.index}}">{{value[head]}}</td>
+                                                        {% endif %}
                                                     {% endif %}
                                                 {% endif %}
                                             {% endfor %}
