@@ -38,6 +38,7 @@ class Leaderboard:
         self.table_name_column = None
         self.sort_cols = []
         self.table_names = {}
+        self.default_sort_col = None
     
     def load_config(self):
         with open(self.config_file(self.id), "r") as f:
@@ -45,6 +46,10 @@ class Leaderboard:
             self.title = config['title']
             self.sort_cols = []
             self.cols_config = {}
+            try:
+                self.default_sort_col = config['default_sort_col']
+            except:
+                self.default_sort_col = None
             for i, col in enumerate(config['sort_cols']):
                 if isinstance(col, str):
                     self.sort_cols.append(col)
@@ -87,7 +92,7 @@ class Leaderboard:
             if student_name is not None:
                 table = table.loc[(table['Name'].str.lower()).str.contains(student_name.lower())]
             else:
-                table = table.groupby('Name', as_index=False).apply(lambda x: x.sort_values(['Evaluation Time']).iloc[-1])
+                table = table.groupby('Name', as_index=False).apply(lambda x: x.sort_values(render_data['sort_col']).iloc[-1])
             render_data['tables'][table_id] = table.sort_values(
                 by=render_data['sort_col'], 
                 ascending=self.cols_config[render_data['sort_col']]['sort'] != 'ascending'
@@ -119,6 +124,7 @@ def main():
                 leaderboard = Leaderboard(leaderboard_id)
                 leaderboard.load_config()
                 leaderboard.load_data()
+                if sortby is None: sortby = leaderboard.default_sort_col
                 data = leaderboard.get_render_data(
                     sortby=sortby,
                     student_name=student_name
