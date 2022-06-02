@@ -50,6 +50,10 @@ class Leaderboard:
                 self.default_sort_col = config['default_sort_col']
             except:
                 self.default_sort_col = None
+            try:
+                self.legend = config['legend']
+            except:
+                self.legend = None
             for i, col in enumerate(config['sort_cols']):
                 if isinstance(col, str):
                     self.sort_cols.append(col)
@@ -85,6 +89,7 @@ class Leaderboard:
     def get_render_data(self, sortby=None, student_name=None):
         render_data = {}
         render_data['title'] = self.title
+        render_data['legend'] = self.legend
         render_data['tables'] = {}
         render_data['sort_col'] = sortby if sortby else self.sort_cols[0]
         render_data['sort_cols'] = self.sort_cols
@@ -93,6 +98,9 @@ class Leaderboard:
                 table = table.loc[(table['Name'].str.lower()).str.contains(student_name.lower())]
             else:
                 table = table.groupby('Name', as_index=False).apply(lambda x: x.sort_values(render_data['sort_col']).iloc[-1])
+            try:
+                table['Evaluation Time'] = pd.to_datetime(table['Evaluation Time']).dt.strftime('%m/%d %I:%M %p')
+            except: pass
             render_data['tables'][table_id] = table.sort_values(
                 by=render_data['sort_col'], 
                 ascending=self.cols_config[render_data['sort_col']]['sort'] != 'ascending'
