@@ -1,5 +1,11 @@
 title: "War Attack Errors (Round 1)"
 sort_cols:
-    - Name
-    - Evaluation Time
-    - Error
+        - Name:
+                range: null
+                sort: descending
+        - Evaluation Time:
+                sort: descending
+                range: null
+        - Error:
+                sort: ascending
+                range: null

@@ -1,9 +1,35 @@
 title: Attack Homework
 sort_cols:
-    - name
-    - score
-    - number_queries
-    - final_acc
-    - distance
-    - cost_time
-    - binary_score
+    - Name:
+        sort: descending
+        range: null    
+    - Evaluation Time:
+        sort: ascending
+        range: null
+    - Attacker Success Rate:
+        sort: ascending
+        range: 
+            max: 100
+            min: 0
+            threshold: 96
+    - distance:
+        sort: descending
+        range:
+            max: 15
+            min: 7
+            threshold: 7.75
+    - Time:
+        sort: descending
+        range: 
+           max: 900
+           min: 0
+           threshold: 120
+    - Queries:
+        sort: descending
+        range:
+            max: 25000
+            min: 0
+            threshold: 8500
+    - Meets Expectations:
+        sort: ascending
+        range: null

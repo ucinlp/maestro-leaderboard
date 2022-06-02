@@ -1,10 +1,97 @@
 title: "War Attack (Round 1)"
+legend:
+        bl: "Adversarially trained model on FGSM attack"
+        h1: "Hidden method 1"
+        h2: "Hidden method 2"
+        sr: "Success rate"
+        dist: "Distance"
+        query: "Prediction + gradient queries"
+table_name_column: Attack Type
+table_names:
+    BlackBox: "Black-box Attacks"
+    WhiteBox: "White-box Attacks"
 sort_cols:
-    - Name
-    - Evaluation Time
-    - Defense 1 Attacker Success Rate
-    - Defense 1 Time
-    - Defense 1 Dist
-    - Defense 2 Attacker Success Rate
-    - Defense 2 Time
-    - Defense 2 Dist
+        - Name:
+                sort: descending
+                range: null
+        - Evaluation Time:
+                sort: descending
+                range: null
+        - Score:
+                sort: ascending
+                range:
+                        max: 100
+                        min: 40
+                        threshold: null
+        - bl sr:
+                sort: ascending
+                range:
+                        max: 100
+                        min: 0
+                        threshold: null
+        - bl dist:
+                sort: descending
+                range:
+                        max: 15
+                        min: 0
+                        threshold: null
+        - bl query:
+                sort: descending
+                range:
+                        max: 1000
+                        min: 0
+                        threshold: null
+        - bl score:
+                sort: ascending
+                range:
+                        max: 100
+                        min: 40
+                        threshold: null
+        - h1 sr:
+                sort: ascending
+                range:
+                        max: 100
+                        min: 0
+                        threshold: null
+        - h1 dist:
+                sort: descending
+                range:
+                        max: 15
+                        min: 0
+                        threshold: null
+        - h1 query:
+                sort: descending
+                range:
+                        max: 1000
+                        min: 0
+                        threshold: null
+        - h1 score:
+                sort: ascending
+                range:
+                        max: 100
+                        min: 40
+                        threshold: null
+        - h2 sr:
+                sort: ascending
+                range: 
+                        max: 100
+                        min: 0
+                        threshold: null
+        - h2 dist:
+                sort: descending
+                range:
+                        max: 15
+                        min: 0
+                        threshold: null
+        - h2 query:
+                sort: descending
+                range: 
+                        max: 1000
+                        min: 0
+                        threshold: null
+        - h2 score:
+                sort: ascending
+                range:
+                        max: 100
+                        min: 40
+                        threshold: null

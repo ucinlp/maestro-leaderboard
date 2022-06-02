@@ -1,8 +1,124 @@
 title: "War Defense (Round 1)"
+legend:
+        PGD: "Projected Gradient Descent"
+        h1: "Hidden method 1"
+        h2: "Hidden method 2"
+        Gen: "Genetic Attack"
+        sr: "Success rate"
+        dist: "Distance"
+        query: "Prediction + gradient queries"
 sort_cols:
-    - Name
-    - Evaluation Time
-    - Raw Acc
-    - FGSM Acc
-    - PGD Acc
-    - Hidden Attack
+        - Name:
+                sort: descending
+                range: null
+        - Eval Time:
+                sort: descending
+                range: null
+        - Acc:
+                sort: ascending
+                range:
+                        max: 100
+                        min: 0
+                        threshold: 80
+        - Score:
+                sort: ascending
+                range:
+                        max: 100
+                        min: 40
+                        threshold: 80
+        - PGD sr:
+                sort: ascending
+                range:
+                        max: 100
+                        min: 0
+                        threshold: 80
+        - PGD dist:
+                sort: descending
+                range: 
+                        max: 15
+                        min: 0
+                        threshold: null
+        - PGD query:
+                sort: descending
+                range:
+                        max: 1000
+                        min: 0
+                        threshold: null
+        - PGD score:
+                sort: ascending
+                range:
+                        max: 100
+                        min: 40
+                        threshold: null
+        - h1 sr:
+                sort: ascending
+                range:
+                        max: 100
+                        min: 0
+                        threshold: null
+        - h1 dist:
+                sort: descending
+                range:
+                        max: 15
+                        min: 0
+                        threshold: null
+        - h1 query:
+                sort: descending
+                range:
+                        max: 1000
+                        min: 0
+                        threshold: null
+        - h1 score:
+                sort: ascending
+                range:
+                        max: 1000
+                        min: 40
+                        threshold: null
+        - Gen sr:
+                sort: ascending
+                range:
+                        max: 100
+                        min: 0
+                        threshold: null
+        - Gen dist:
+                sort: descending
+                range:
+                        max: 15
+                        min: 0
+                        threshold: null
+        - Gen query:
+                sort: descending
+                range:
+                        max: 1000
+                        min: 0
+                        threshold: null
+        - Gen score:
+                sort: ascending
+                range: 
+                        max: 100
+                        min: 40
+                        threshold: null
+        - h2 sr:
+                sort: ascending
+                range: 
+                        max: 100
+                        min: 0
+                        threshold: null
+        - h2 dist:
+                sort: descending
+                range:
+                        max: 15
+                        min: 0
+                        threshold: null
+        - h2 query:
+                sort: descending
+                range:
+                        max: 1000
+                        min: 0
+                        threshold: null
+        - h2 score:
+                sort: ascending
+                range:
+                        max: 100
+                        min: 40
+                        threshold: null

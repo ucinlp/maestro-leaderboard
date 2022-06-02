@@ -1,5 +1,23 @@
 title: Defense Homework
 sort_cols:
-    - Name
-    - Adv Acc
-    - Raw Acc 
+        - Name:
+                sort: descending
+                range: null
+        - Evaluation Time:
+                sort: ascending
+                range: null
+        - Accuracy:
+                sort: ascending
+                range:
+                        max: 100
+                        min: 90
+                        threshold: 95
+        - FGSM Success Rate:
+                sort: descending
+                range:
+                        max: 20
+                        min: 0
+                        threshold: 10
+        - Meet Expectation:
+                sort: ascending
+                range: null

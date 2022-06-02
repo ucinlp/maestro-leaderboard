@@ -2,7 +2,7 @@ title: Attack Project
 table_name_column: Attack Type
 sort_cols:
     - Name:
-        sort: ascending
+        sort: descending
         range: null
     - Evaluation Time:
         sort: ascending
@@ -21,19 +21,22 @@ sort_cols:
                 threshold: 7.75
     - Time:
         sort: descending
-        range: null
-    - Queries:
+        range: 
+                max: 900
+                min: 0
+                threshold: 400
+    - Total Queries:
         sort: descending
         range:
                 max: 25000
                 min: 0
                 threshold: 8500
-    - gradient:
-            sort: ascending
-            range: null
     - Score:
             sort: ascending
-            range: null
+            range: 
+                max: 100
+                min: 0
+                threshold: 60
 table_names:
     BlackBox: "Black-box Attacks"
     WhiteBox: "White-box Attacks"

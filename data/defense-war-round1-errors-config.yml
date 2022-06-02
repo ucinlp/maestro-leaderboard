@@ -1,5 +1,11 @@
 title: "War Defense Errors (Round 1)"
 sort_cols:
-    - Name
-    - Evaluation Time
-    - Error
+        - Name:
+                sort: descending
+                range: null
+        - Evaluation Time:
+                sort: descending
+                range: null
+        - Error:
+                sort: ascending
+                range: null

@@ -1,5 +1,11 @@
 title: Attack Project Errors
 sort_cols:
-    - Name
-    - Evaluation Time
-    - Error
+    - Name:
+        sort: ascending
+        range: null
+    - Evaluation Time:
+        sort: ascending
+        range: null
+    - Error:
+        sort: ascending
+        range: null
