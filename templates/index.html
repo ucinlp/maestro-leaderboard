@@ -127,7 +127,7 @@
                         </div>
                         <div id="checkboxes">
                             {% for col in data.sort_cols %}
-                                {% if loop.index > 8 %}
+                                {% if loop.index > 20 %}
                                 <label for="{{ loop.index }}" id="button_col_{{loop.index}}" style="cursor: pointer;">
                                 <input type="checkbox" id="checkbox_col_{{loop.index}}" />{{col}}</label>
                                 {% else %}
@@ -151,6 +151,17 @@
 		{% if data.tables|length == 0%}
 		<h3>There are no submissions yet.</h3>
 		{% endif %}
+		{% if data.legend is not none %}
+			<div class="col-md-12">
+				<div class='legend'>
+				<div style="display: grid;grid-template-columns: 1fr 1fr 1fr;">
+					{% for key, value in data.legend.items() %}
+						<p><b>{{ key }}:</b> {{ value }}</p>
+					{% endfor %}
+					</div>
+				</div>
+			</div>
+		{% endif %}
                 {% for table_name, table in data.tables.items() %}
                 <div class="col-md-{{ '6' if data.tables|length > 1 else '12'}}">
                     <div class="infoCard">
@@ -165,7 +176,7 @@
                                     <tr>
                                         <th>Rank</th>
                                         {% for col in table.head() %}
-                                            {% if loop.index > 8 %}
+                                            {% if loop.index > 20 %}
                                                 <th class="header_col_{{loop.index}} not-visible-{{loop.index}}">
                                             {% else %}
                                                 <th class="header_col_{{loop.index}}">
@@ -189,7 +200,7 @@
                                         <tr>
                                             <td>{{outer_loop.index}}</td>
                                             {% for head in table.head() %}
-                                                {% if loop.index > 8 %}
+                                                {% if loop.index > 20 %}
                                                     <td class="row_{{outer_loop.index}}_col_{{loop.index}} not-visible-{{loop.index}}">{{value[head]}}</td>
                                                 {% else %}
                                                     {% if cols[head].range is not none %}
