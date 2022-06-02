@@ -313,6 +313,7 @@ button:focus {
 }
 #topNavbar .brandDiv {
   float: left;
+  padding-left: 15px;
   line-height: 100%;
 }
 #topNavbar .navbar-brand {

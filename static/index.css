@@ -206,3 +206,25 @@ pre {
   justify-content: space-around;
   align-items: center;
 }
+
+.row .col-md-6 {
+	width: 100% !important;
+}
+
+.legend {
+	width: 100%;
+    	display: flex;
+    	justify-content: center;
+}
+.legend > div {
+	width: 90%;
+	padding: 10px;
+
+}
+.legend p {
+	width: max-content;
+	justify-self: center;
+}
+.container {
+	width: 100%;
+}
